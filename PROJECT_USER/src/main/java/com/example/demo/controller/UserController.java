@@ -1,22 +1,24 @@
 package com.example.demo.controller;
 
-import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.io.InputStream;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.UserDto;
-import com.example.demo.entity.User;
 import com.example.demo.model.UserRequest;
 import com.example.demo.model.UserResponse;
 import com.example.demo.service.UserService;
@@ -71,6 +73,7 @@ public class UserController {
 		java.util.List<UserResponse> ulist=userService.getAllUsers();
 	    return ResponseEntity.status(HttpStatus.CREATED).body(ulist);	
 	}
+	
 
 	@PostMapping("/search")
 	public ResponseEntity<?> getUserByEmail(@RequestBody UserRequest ur){
