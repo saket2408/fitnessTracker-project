@@ -23,13 +23,13 @@ public class OverWeightServiceImpl implements OverWeightService {
 		for(OverWeightMeal meal : list) {
 			ResponseModel rs = new ResponseModel();
 			rs.setDay(meal.getId());
-			String[] breakfast = meal.getBreakfast().split(",");
+			String[] breakfast = meal.getBreakfast().split(";");
 			rs.setBreakfast(breakfast);
-			String[] lunch = meal.getLunch().split(",");
+			String[] lunch = meal.getLunch().split(";");
 			rs.setLunch(lunch);
-			String[] snack = meal.getSnack().split(",");
+			String[] snack = meal.getSnack().split(";");
 			rs.setSnack(snack);
-			String[] dinner = meal.getDinner().split(",");
+			String[] dinner = meal.getDinner().split(";");
 			rs.setDinner(dinner);
 			list2.add(rs);
 		}
