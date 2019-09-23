@@ -47,8 +47,7 @@ public class UserController {
 		UserDto userdto = mapper.map(userRequest, UserDto.class);
 		UserDto responseDtoUser = userService.verifyUser(userdto);
 		if (responseDtoUser != null) {
-			UserResponse userResponse = mapper.map(responseDtoUser, UserResponse.class);
-			return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
+			return ResponseEntity.status(HttpStatus.CREATED).body(responseDtoUser);
 
 		} else {
 			return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorModel("wrong credentials"));
@@ -75,10 +74,8 @@ public class UserController {
 		if (udt == null) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorModel("email not found"));
 		} else {
-			ModelMapper mapper = new ModelMapper();
-			mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-			UserResponse userdto = mapper.map(udt, UserResponse.class);
-			return ResponseEntity.status(HttpStatus.CREATED).body(userdto);
+			
+			return ResponseEntity.status(HttpStatus.CREATED).body(udt);
 		}
 	}
 }
