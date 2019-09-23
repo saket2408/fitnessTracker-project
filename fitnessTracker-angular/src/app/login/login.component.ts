@@ -14,7 +14,9 @@ export class LoginComponent implements OnInit {
   constructor( private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
-   
+    if(sessionStorage.getItem("email")!=null){
+      this.router.navigate(['home']);
+    }
   }
 
   edit(editObj){

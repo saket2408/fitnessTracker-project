@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('openModal',undefined) openModal:ElementRef;
  user : any
   _url: any
-  constructor() { }
+  constructor(private router : Router) { }
 
   ngOnInit() {
     this._url = `http://localhost:8010/search`
@@ -27,5 +28,11 @@ export class HomeComponent implements OnInit {
      this.user = data
   })
   this.openModal.nativeElement.click();
+  }
+
+  signout(){
+    sessionStorage.removeItem("email");
+    this.router.navigate(['login']);
+
   }
 }
