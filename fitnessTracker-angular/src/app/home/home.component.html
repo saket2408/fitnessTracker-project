@@ -1,0 +1,45 @@
+<button id="openModal" #openModal [hidden]="true" 
+ data-toggle="modal" data-target="#login-modal"></button>
+
+ <div class="modal fade" id="login-modal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h3 class="modal-title"><b><i>Hello {{user.firstName}} {{user.lastName}}</i></b></h3>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div *ngIf="user.category == 'underweight_male' || user.category == 'underweight_female'" style="align-items: center" class="modal-body">
+                <h3>Your BODY MASS INDEX : 
+                {{user.bmi}}</h3><br>
+                <h1 style="color:orange;">You are underweight</h1><br>
+                <h3>Let's exercise!!</h3>
+            </div>
+            <div *ngIf="user.category == 'overweight_male' || user.category == 'overweight_female'" style="align-items: center" class="modal-body">
+                    <h3>Your BODY MASS INDEX : 
+                            {{user.bmi}}</h3><br>
+                            <h1 style="color:red;">You are overweight</h1><br>
+                            <h3>Let's exercise!!</h3>
+                </div>
+                <div *ngIf="user.category == 'normal_male' || user.category == 'normal_female'"  style="align-items: center" class="modal-body">
+                        <h3>Your BODY MASS INDEX : 
+                                {{user.bmi}}</h3><br>
+                                <h1 style="color:green;">You have normal BMI</h1><br>
+                                <h3>Let's exercise!!</h3>
+                    </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Let's Go</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
+
+
+      <!--more code here-->

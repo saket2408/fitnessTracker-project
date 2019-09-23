@@ -1,0 +1,39 @@
+<div class="background row">
+        <ul>
+            <li class="title"><a routerLink='../signup'><img class="image" src="../../favicon.ico"> Fitness Tracker</a></li>
+            <li><a routerLink='../login'>Login</a></li>
+            <li><a routerLink='../signup'>Sign Up</a></li>
+          </ul>
+          
+        <div class="row">
+                <div class="col-sm-6">
+                        <div class="qoute">  
+                              <b><i>“The last three or four reps is what makes the muscle grow. This area of pain divides a 
+                            champion from someone who is not a champion.”<br>
+                
+                           &nbsp; — Arnold Schwarzenegger, seven-time Mr. Olympia</i></b>
+                        </div>
+                
+                    </div>
+            
+            <div class="form-class col-sm-6">
+                    <br><br>
+        
+                <img class="form-image " src="../../favicon.ico">
+                
+                <h2 style="color: white"><b>REGISTER</b></h2>
+                <br><br><br>
+               
+            <div *ngIf="error">
+                    <div class="alert alert-danger">
+                          <strong style="color: black; font-size: 20px;">{{error}}</strong>
+                       </div>
+                 </div>
+                   
+        
+            </div>
+          
+        </div>
+          
+        </div>
+         
