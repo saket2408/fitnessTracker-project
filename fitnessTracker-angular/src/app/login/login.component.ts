@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   constructor( private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
-    if(sessionStorage.getItem("email")!=null){
+    if(localStorage.getItem("email")!=null){
       this.router.navigate(['home']);
     }
   }
@@ -44,7 +44,7 @@ else{
         this.router.navigate(['login']);
       }
       else{
-        sessionStorage.setItem("email" , data.email);
+        localStorage.setItem("email" , data.email);
         this.router.navigate(['home']);
           }
     })

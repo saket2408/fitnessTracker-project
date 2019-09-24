@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
             "content-type": "application/json"
            },
         body : JSON.stringify({
-            email :sessionStorage.getItem("email")
+            email :localStorage.getItem("email")
         })
     })
     .then(res=>res.json())
@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   }
 
   signout(){
-    sessionStorage.removeItem("email");
+    localStorage.removeItem("email");
     this.router.navigate(['login']);
 
   }

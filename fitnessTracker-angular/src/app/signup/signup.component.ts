@@ -11,6 +11,7 @@ export class SignupComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   _url : any
+  error:any
   constructor(private formBuilder: FormBuilder,private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
@@ -58,8 +59,14 @@ onSubmit() {
 })
 .then(res=>res.json())
 .then(data=>{
-  sessionStorage.setItem("email" , this.registerForm.value.email,);
+  if(data.message!=null){
+    this.error = data.message;
+    this.router.navigate(['signup']);
+  }
+  else{
+  localStorage.setItem("email" , this.registerForm.value.email,);
   this.router.navigate(['home']);
+  }
 })
 }
 

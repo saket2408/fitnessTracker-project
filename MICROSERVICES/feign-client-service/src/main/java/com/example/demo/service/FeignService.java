@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import com.example.demo.client.UnderWeightMaleExerciseClient;
 import com.example.demo.client.UnderWeightMaleMealClient;
 import com.example.demo.client.UserServiceClient;
 import com.example.demo.model.UserRequest;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Service
 public class FeignService {
@@ -74,12 +76,12 @@ public class FeignService {
 
 	
 
-	
+	@HystrixCommand(fallbackMethod = "getFallbackCreateUser1")
 	public ResponseEntity<?> createUser(UserRequest userRequest){
 		return userServiceClient.createUser(userRequest);
 	}
 
-	
+	@HystrixCommand(fallbackMethod = "getFallbackCreateUser")
 	public ResponseEntity<?> verifyUser(UserRequest userRequest){
 		return userServiceClient.verifyUser(userRequest);
 	}
@@ -143,5 +145,13 @@ public class FeignService {
 		
 	}
 	
+	
+	public ResponseEntity<?> getFallbackCreateUser(UserRequest userRequest){
+		return ResponseEntity.status(HttpStatus.CREATED).body(new Error("ERROR 404: server unavaible"));
+	}
+	
+	public ResponseEntity<?> getFallbackCreateUser1(UserRequest userRequest){
+		return ResponseEntity.status(HttpStatus.CREATED).body(new Error("ERROR 404: server unavaible"));
+	}
 	
 }
