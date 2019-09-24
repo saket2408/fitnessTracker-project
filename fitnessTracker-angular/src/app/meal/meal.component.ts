@@ -1,16 +1,16 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-meal',
+  templateUrl: './meal.component.html',
+  styleUrls: ['./meal.component.css']
 })
-export class HomeComponent implements OnInit {
- 
- user : any
+export class MealComponent implements OnInit {
+
+  user : any
   _url: any
-  workout : any
+  meal : any
 
   constructor(private router : Router) { }
 
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     .then(res=>res.json())
     .then(data=>{
      this.user = data
-        this._url = `http://localhost:8010/workout/`
+        this._url = `http://localhost:8010/meal/`
         fetch(this._url+data.category,{
             method : "GET",
             headers: {
@@ -37,16 +37,17 @@ export class HomeComponent implements OnInit {
             })
         .then(res=>res.json())
         .then(result=>{
-          this.workout = result;
+          this.meal = result;
+          console.log(this.meal);
             
         })
       })
-  
-  }
+    }
+      signout(){
+        localStorage.removeItem("email");
+        this.router.navigate(['login']);
+    
+      }
 
-  signout(){
-    localStorage.removeItem("email");
-    this.router.navigate(['login']);
-
-  }
 }
+

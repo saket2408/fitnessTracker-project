@@ -64,7 +64,7 @@ onSubmit() {
     this.router.navigate(['signup']);
   }
   else{
-  localStorage.setItem("email" , this.registerForm.value.email,);
+  localStorage.setItem("email" , this.registerForm.value.email);
   this.router.navigate(['home']);
   }
 })

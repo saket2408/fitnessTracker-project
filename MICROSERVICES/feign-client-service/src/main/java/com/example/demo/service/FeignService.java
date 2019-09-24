@@ -76,7 +76,7 @@ public class FeignService {
 
 	
 
-	@HystrixCommand(fallbackMethod = "getFallbackCreateUser1")
+	
 	public ResponseEntity<?> createUser(UserRequest userRequest){
 		return userServiceClient.createUser(userRequest);
 	}
@@ -150,8 +150,6 @@ public class FeignService {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new Error("ERROR 404: server unavaible"));
 	}
 	
-	public ResponseEntity<?> getFallbackCreateUser1(UserRequest userRequest){
-		return ResponseEntity.status(HttpStatus.CREATED).body(new Error("ERROR 404: server unavaible"));
-	}
+	
 	
 }

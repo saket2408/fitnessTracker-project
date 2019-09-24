@@ -7,7 +7,11 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.UserDto;
@@ -16,12 +20,15 @@ import com.example.demo.model.UserResponse;
 import com.example.demo.repository.UserRepository;
 
 @Service
+@Component
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private Environment env;
 	UserRepository userRepository;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	 @Autowired
+	 private JavaMailSender javaMailSender;
 
 	public UserServiceImpl(Environment env, UserRepository userRepository,
 			BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -67,9 +74,27 @@ public class UserServiceImpl implements UserService {
 				}
 
 			}
-			userRepository.save(user);
-			UserDto userDto = mapper.map(user, UserDto.class);
-			return userDto;
+			System.out.println("Sending Email...");
+			try {
+				SimpleMailMessage helper= new SimpleMailMessage();
+				 helper.setTo(user.getEmail());
+				 helper.setSubject("Welcome to Fitness Tracker");
+				 helper.setText("Congratulations,You are our customer now!! We are so happy that now you are a part of our family and we promise to keep u fit and healthy ThankYou :)");
+				    
+				    javaMailSender.send(helper);
+			} catch (MailException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally {
+				userRepository.save(user);
+				
+				UserDto userDto = mapper.map(user, UserDto.class);
+				return userDto;
+			}
+			       	 
+			
+
 		}
 	}
 

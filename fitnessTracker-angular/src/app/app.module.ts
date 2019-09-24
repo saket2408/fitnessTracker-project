@@ -10,13 +10,17 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
+import { IndexComponent } from './index/index.component';
+import { MealComponent } from './meal/meal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    HomeComponent
+    HomeComponent,
+    IndexComponent,
+    MealComponent
   ],
   imports: [
     BrowserModule,
