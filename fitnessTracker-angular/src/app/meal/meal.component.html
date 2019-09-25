@@ -71,7 +71,7 @@
     </div>
     <div class="col-sm-1"></div>
     <div class="col-sm-4">
-        <div class="jumbotron">
+        <div style="height: 35vh" class="jumbotron">
             <h3 class="modal-title" style="text-align: center; font-family: 'Courier New', Courier, monospace;">
                 <b><i>Welcome {{user.firstName}} {{user.lastName}}</i></b></h3>
 
@@ -96,6 +96,15 @@
                 <div class="alert alert-success">
                     <h3 style="text-align: center;color:green; font-family: 'Courier New', Courier, monospace; "><b>You have normal BMI</b></h3>
                 </div>
+            </div>
+        </div>
+
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Feed-icon.svg/1200px-Feed-icon.svg.png" width="20px" height="20px"> <b>RSS Feed from World Health Oranization</b><br>
+        <div style="overflow-y: scroll;border-left: 1px solid black; height: 45vh; padding:10px;">
+            <div *ngFor="let feed of feeds">
+                <h3>{{feed.title}}</h3>
+                <h4>{{feed.author}}-{{feed.pubDate | date:'dd-MM-yyyy'}}</h4>
+                <P style="text-align: justify; margin-right:20px;"><em>{{feed.description | stripHtmlTags}}</em></P>
             </div>
         </div>
     </div>

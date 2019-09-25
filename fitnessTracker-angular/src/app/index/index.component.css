@@ -316,11 +316,11 @@
     font-weight: bolder;
     font-style: initial;
     color: rgb(66, 189, 238);
-    margin-left: 270px;
+    margin-left: 240px;
 }
 
 .cost_2 h3 {
-    margin-left: 250px;
+    margin-left: 240px;
     color: rgb(66, 189, 238);
 }
 
@@ -346,11 +346,11 @@
     font-weight: bolder;
     font-style: initial;
     color: rgb(66, 189, 238);
-    margin-left: 270px;
+    margin-left: 200px;
 }
 
 .cost_3 h3 {
-    margin-left: 250px;
+    margin-left: 200px;
     color: rgb(66, 189, 238);
 }
 
@@ -362,7 +362,7 @@
 
 .cost_3 a {
     margin-left: 250px;
-    width: 100px;
+    width: 160px;
     height: 50px;
     color: white;
     font-size: 17px;

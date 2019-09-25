@@ -1,3 +1,4 @@
+import { StripHtmlTagsPipe } from './pipe/strip-html-tags.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -13,6 +14,8 @@ import { HomeComponent } from './home/home.component';
 import { IndexComponent } from './index/index.component';
 import { MealComponent } from './meal/meal.component';
 import { PaidSignupComponent } from './paid-signup/paid-signup.component';
+import { ProfileComponent } from './profile/profile.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { PaidSignupComponent } from './paid-signup/paid-signup.component';
     HomeComponent,
     IndexComponent,
     MealComponent,
-    PaidSignupComponent
+    PaidSignupComponent,
+    ProfileComponent,
+    StripHtmlTagsPipe
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,8 @@ import { PaidSignupComponent } from './paid-signup/paid-signup.component';
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

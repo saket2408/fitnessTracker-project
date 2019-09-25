@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Feed } from '../model/feed';
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-meal',
@@ -11,8 +18,12 @@ export class MealComponent implements OnInit {
   user : any
   _url: any
   meal : any
+  private feedUrl: string = 'https://www.who.int/rss-feeds/news-english.xml';
+  private rssToJsonServiceBaseUrl: string = 'https://rss2json.com/api.json?rss_url='
+private feed:any;
+private feeds :any;
 
-  constructor(private router : Router) { }
+  constructor(private router : Router,private http: HttpClient) { }
 
   ngOnInit() {
     this._url = `http://localhost:8010/search`
@@ -38,6 +49,7 @@ export class MealComponent implements OnInit {
         .then(res=>res.json())
         .then(result=>{
           this.meal = result;
+          this.refreshFeed(); 
         })
       })
     }
@@ -45,6 +57,29 @@ export class MealComponent implements OnInit {
         localStorage.removeItem("email");
         this.router.navigate(['login']);
     
+      }
+
+      refreshFeed() {
+        // Adds 1s of delay to provide user's feedback.
+        this.getFeedContent(this.feedUrl)
+            .subscribe(
+              feed => this.feeds = feed.items,
+                
+                );
+      }
+     
+      
+      
+    
+      getFeedContent(url: string): Observable<Feed> {
+        return this.http.get(this.rssToJsonServiceBaseUrl + url)
+                .pipe(map(this.extractFeeds));
+                
+    
+      }
+      private extractFeeds(res: Response): Feed {
+        this.feed = res;
+        return this.feed;
       }
 
 }
