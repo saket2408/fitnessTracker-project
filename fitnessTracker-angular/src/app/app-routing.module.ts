@@ -5,6 +5,7 @@ import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { IndexComponent } from './index/index.component';
 import { MealComponent } from './meal/meal.component';
+import { PaidSignupComponent } from './paid-signup/paid-signup.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,10 @@ const routes: Routes = [
       path : 'meal',
       component : MealComponent
 
+    },
+    {
+      path : 'signupPaid',
+      component : PaidSignupComponent
     }
 
 ];

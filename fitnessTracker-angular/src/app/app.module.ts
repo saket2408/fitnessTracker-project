@@ -12,6 +12,7 @@ import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { IndexComponent } from './index/index.component';
 import { MealComponent } from './meal/meal.component';
+import { PaidSignupComponent } from './paid-signup/paid-signup.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MealComponent } from './meal/meal.component';
     SignupComponent,
     HomeComponent,
     IndexComponent,
-    MealComponent
+    MealComponent,
+    PaidSignupComponent
   ],
   imports: [
     BrowserModule,
