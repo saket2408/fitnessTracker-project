@@ -27,14 +27,11 @@ public class PaypalController {
 	@GetMapping("/pay")
 	public ResponseEntity<?> payment() {
 		try {
-			
-			System.out.println("here");
 			Payment payment = service.createPayment(1.0, "INR", "paypal",
 					"sale", "testing", "http://localhost:9090/" + CANCEL_URL,
 					"http://localhost:9090/" + SUCCESS_URL);
 			for(Links link:payment.getLinks()) {
 				if(link.getRel().equals("approval_url")) {
-					System.out.println(link.getHref());
 					return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorMessage(link.getHref()));
 				}
 			}

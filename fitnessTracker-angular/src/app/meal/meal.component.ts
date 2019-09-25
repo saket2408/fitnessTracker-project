@@ -38,8 +38,6 @@ export class MealComponent implements OnInit {
         .then(res=>res.json())
         .then(result=>{
           this.meal = result;
-          console.log(this.meal);
-            
         })
       })
     }
