@@ -44,10 +44,11 @@ onSubmit() {
   this._url = `http://localhost:8090/pay`
   fetch(this._url,{
     method : "GET",
-    headers: {
-        "content-type": "application/json"
-       }
-      })
+    headers:{
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  })
        .then(res=>res.json())
        .then(data=>{
         document.location.href = data.message;

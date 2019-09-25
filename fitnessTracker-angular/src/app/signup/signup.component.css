@@ -32,15 +32,8 @@ li a:hover {
 }
 
 .image {
-    height: 40px;
-    width: 40px;
-}
-
-.background {
-    background-image: url("../images/background.jpg");
-    height: 100vh;
-    background-size: cover;
-    background-repeat: no-repeat;
+    height: 30px;
+    width: 30px;
 }
 
 .form-class {
@@ -52,7 +45,11 @@ li a:hover {
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 50;
-    height: 90vh;
+    height: 700px;
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 5px;
+    border-radius: 20px;
 }
 
 label {
@@ -66,16 +63,8 @@ label {
     height: 100px;
 }
 
-.qoute {
-    font-family: 'Courier New', Courier, monospace;
-    padding: 30px;
-    font-size: 30px;
-    color: white;
-    margin-top: 400px;
-}
-
 form {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .danger {

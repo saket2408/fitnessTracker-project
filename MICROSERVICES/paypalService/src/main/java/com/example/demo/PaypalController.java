@@ -32,6 +32,7 @@ public class PaypalController {
 					"http://localhost:9090/" + SUCCESS_URL);
 			for(Links link:payment.getLinks()) {
 				if(link.getRel().equals("approval_url")) {
+					System.out.println(link.getHref());
 					return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorMessage(link.getHref()));
 				}
 			}

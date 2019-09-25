@@ -36,13 +36,6 @@ li a:hover {
     width: 40px;
 }
 
-.background {
-    background-image: url("../images/background.jpg");
-    height: 100vh;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
 .form-class {
     background-color: black;
     opacity: 0.9;
@@ -52,7 +45,11 @@ li a:hover {
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 50;
-    height: 90vh;
+    height: 650px;
+    width: 700px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 20px;
 }
 
 label {
@@ -64,14 +61,6 @@ label {
 .form-image {
     width: 100px;
     height: 100px;
-}
-
-.qoute {
-    font-family: 'Courier New', Courier, monospace;
-    padding: 30px;
-    font-size: 30px;
-    color: white;
-    margin-top: 400px;
 }
 
 form {

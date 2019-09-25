@@ -39,7 +39,7 @@ private feeds :any;
     .then(res=>res.json())
     .then(data=>{
      this.user = data
-        this._url = `http://localhost:8010/workout/`
+      this._url = `http://localhost:8010/workout/`
         fetch(this._url+data.category,{
             method : "GET",
             headers: {
