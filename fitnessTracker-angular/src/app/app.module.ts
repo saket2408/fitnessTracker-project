@@ -16,7 +16,8 @@ import { MealComponent } from './meal/meal.component';
 import { PaidSignupComponent } from './paid-signup/paid-signup.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { TrackComponent } from './track/track.component';
+import {ChartsModule} from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     MealComponent,
     PaidSignupComponent,
     ProfileComponent,
-    StripHtmlTagsPipe
+    StripHtmlTagsPipe,
+    TrackComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     ModalModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

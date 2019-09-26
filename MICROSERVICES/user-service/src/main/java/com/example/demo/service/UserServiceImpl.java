@@ -171,4 +171,58 @@ public class UserServiceImpl implements UserService {
 		}
 
 	}
+	
+	@Override
+	public User sendPassword(UserDto userDto) {
+		User user = userRepository.findByEmail(userDto.getEmail());
+		if (user == null) {
+			return null;
+		} else {
+		SimpleMailMessage helper= new SimpleMailMessage();
+		 helper.setTo(user.getEmail());
+		 helper.setSubject("Password Reset");
+		 helper.setText("your token is: " + user.getPassword());	    
+	    javaMailSender.send(helper);	
+	    return user;
+	    }
+	}
+	
+	@Override
+	public UserDto updatePassword(UserDto userDto) {
+		User user = userRepository.findByEmail(userDto.getEmail());
+		if (user == null) {
+			return null;
+		} else {
+		String bpass = bCryptPasswordEncoder.encode(userDto.getPassword());
+		user.setPassword(bpass);
+	    userRepository.save(user);
+	    ModelMapper mapper = new ModelMapper();
+		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		UserDto userdto = mapper.map(user, UserDto.class);
+		return userdto;
+	    }
+	}
+	
+	
+	@Override
+	public UserDto verifyUserbyBcrypt(UserDto userdto) {
+
+		ModelMapper mapper = new ModelMapper();
+		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		String email = userdto.getEmail();
+		String password = userdto.getPassword();
+		User user = userRepository.findByEmail(email);
+		if (user == null) {
+			return null;
+		} else {
+			UserDto userDto = mapper.map(user, UserDto.class);
+			if (userDto.getEmail().equals(email) && password.equals(user.getPassword())) {
+				return userDto;
+			} else {
+				return null;
+			}
+
+		}
+
+	} 
 }

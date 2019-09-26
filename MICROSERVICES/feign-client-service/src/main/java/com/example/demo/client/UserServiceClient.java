@@ -15,6 +15,10 @@ public interface UserServiceClient {
 	
 	@PostMapping("/addUser")
 	public ResponseEntity<?> createUser(@RequestBody UserRequest userRequest);
+	
+	@RequestMapping("/loginbyBcrypt")
+	public ResponseEntity<?> verifyUserBycrypt(@RequestBody UserRequest userRequest);
+	
 	@RequestMapping("/login")
 	public ResponseEntity<?> verifyUser(@RequestBody UserRequest userRequest);
 	
@@ -26,5 +30,11 @@ public interface UserServiceClient {
 	
 	@PostMapping("/search")
 	public ResponseEntity<?> getUserByEmail(@RequestBody UserRequest ur);
+	
+	@PostMapping("/password")
+	public ResponseEntity<?> sendPassword(@RequestBody UserRequest user);
+	
+	@PostMapping("/updatePassword")
+	public ResponseEntity<?> updatePassword(@RequestBody UserRequest user);
 
 }

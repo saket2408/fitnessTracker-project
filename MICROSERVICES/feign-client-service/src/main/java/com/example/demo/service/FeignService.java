@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.client.NormalWeightFemaleExerciseClient;
 import com.example.demo.client.NormalWeightFemaleMealClient;
@@ -95,9 +98,22 @@ public class FeignService {
 		return userServiceClient.getAllUsers();
 	}
 	
-
+	public ResponseEntity<?> verifyUserBycrypt(UserRequest userRequest){
+		return userServiceClient.verifyUserBycrypt(userRequest);
+	}
+	
 	public ResponseEntity<?> getUserByEmail(UserRequest ur){
 		return userServiceClient.getUserByEmail(ur);
+	}
+	
+
+	public ResponseEntity<?> sendPassword(UserRequest user){
+		return userServiceClient.sendPassword(user);
+	}
+	
+
+	public ResponseEntity<?> updatePassword(UserRequest user){
+		return userServiceClient.updatePassword(user);
 	}
 	
 	

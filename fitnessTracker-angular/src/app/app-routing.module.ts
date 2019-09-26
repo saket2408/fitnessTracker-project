@@ -7,6 +7,7 @@ import { IndexComponent } from './index/index.component';
 import { MealComponent } from './meal/meal.component';
 import { PaidSignupComponent } from './paid-signup/paid-signup.component';
 import { ProfileComponent } from './profile/profile.component';
+import { TrackComponent } from './track/track.component';
 
 
 const routes: Routes = [
@@ -41,8 +42,11 @@ const routes: Routes = [
     },
     {
       path : 'profile',
-      component : ProfileComponent
-    
+      component : ProfileComponent 
+    },
+    {
+      path : 'track/:id',
+      component : TrackComponent
     }
 
 ];

@@ -27,6 +27,11 @@ public class HomeController {
 		return service.verifyUser(userRequest);
 	}
 	
+	@PostMapping("/loginbyBcrypt")
+	public ResponseEntity<?> verifyUserBycrpyt(@RequestBody UserRequest userRequest){
+		return service.verifyUserBycrypt(userRequest);
+	}
+	
 	@GetMapping("/delete/{id}")
 	public ResponseEntity<?> deleteUser(@PathVariable("id") Integer id){
 		return service.deleteUser(id);
@@ -40,6 +45,16 @@ public class HomeController {
 	@PostMapping("/search")
 	public ResponseEntity<?> getUserByEmail(@RequestBody UserRequest ur){
 		return service.getUserByEmail(ur);
+	}
+	
+	@PostMapping("/password")
+	public ResponseEntity<?> sendPassword(@RequestBody UserRequest user){
+		return service.sendPassword(user);
+	}
+	
+	@PostMapping("/updatePassword")
+	public ResponseEntity<?> updatePassword(@RequestBody UserRequest user){
+		return service.updatePassword(user);
 	}
 	
 	@GetMapping("/workout/{type}")

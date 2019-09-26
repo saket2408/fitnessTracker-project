@@ -17,7 +17,8 @@
         </ul>
         <br>
         <br>
-        <h2 style="text-align: center;">Here is 30 Days Meal plan for you.. </h2><br>
+        <h1 style="text-align: center;font-family: 'Acme', sans-serif;">
+            Here is 30 Days Meal plan for you.. </h1><br>
         <div *ngFor="let meal of meal" class="day">
             <button type="button" data-toggle="modal" class="day1 btn btn-primary" [attr.data-target]="'#day'+meal.day">Day {{meal.day}}</button>
             <div class="modal" id="day{{meal.day}}">

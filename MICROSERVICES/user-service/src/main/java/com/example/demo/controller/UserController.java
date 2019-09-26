@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.apache.tomcat.util.buf.UEncoder;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.UserDto;
+import com.example.demo.entity.User;
 import com.example.demo.model.ErrorModel;
 import com.example.demo.model.UserRequest;
 import com.example.demo.model.UserResponse;
@@ -77,5 +79,48 @@ public class UserController {
 			
 			return ResponseEntity.status(HttpStatus.CREATED).body(udt);
 		}
+	}
+	
+	@PostMapping("/password")
+	public ResponseEntity<?> sendPassword(@RequestBody UserRequest user){
+		ModelMapper mapper = new ModelMapper();
+		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		UserDto userdto = mapper.map(user, UserDto.class);
+		User user1 = userService.sendPassword(userdto);
+		if(user1 == null) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorModel("please enter valid Email"));
+		}
+		else {
+		return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorModel("password sent to email"));
+	}
+	}
+	
+	@PostMapping("/updatePassword")
+	public ResponseEntity<?> updatePassword(@RequestBody UserRequest user){
+		ModelMapper mapper = new ModelMapper();
+		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		UserDto userdto = mapper.map(user, UserDto.class);
+		UserDto user1 = userService.updatePassword(userdto);
+		if(user1 == null) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorModel("email not found"));
+		}
+		else {
+		return ResponseEntity.status(HttpStatus.CREATED).body(user1);
+	}
+	}
+	
+	@RequestMapping("/loginbyBcrypt")
+	public ResponseEntity<?> verifyUserBycrypt(@RequestBody UserRequest userRequest) {
+		ModelMapper mapper = new ModelMapper();
+		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		UserDto userdto = mapper.map(userRequest, UserDto.class);
+		UserDto responseDtoUser = userService.verifyUserbyBcrypt(userdto);
+		if (responseDtoUser != null) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(responseDtoUser);
+
+		} else {
+			return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorModel("please enter valid token"));
+		}
+
 	}
 }

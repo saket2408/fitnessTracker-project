@@ -18,7 +18,8 @@
         </ul>
         <br>
         <br>
-        <h2 style="text-align: center;">Here is 30 Days Workout plan for you.. </h2>
+        <h1 style="text-align: center;font-family: 'Acme', sans-serif;">
+            Here is 30 Days Workout plan for you.. </h1>
         <br>
         <div *ngFor="let wo of workout" class="day">
             <button data-toggle="modal" class="day1 btn btn-primary" [attr.data-target]="'#day'+wo.day">Day {{wo.day}}</button>
@@ -44,7 +45,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Continue</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">back</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" routerLink='../track/{{wo.day}}'>Evaluate Results</button>
                         </div>
                     </div>
                 </div>
@@ -55,7 +57,7 @@
     <div class="col-sm-1"></div>
     <div class="col-sm-4">
         <div style="height: 35vh" class="jumbotron">
-            <h3 class="modal-title" style="text-align: center; font-family: 'Courier New', Courier, monospace;">
+            <h3 class="modal-title" style="text-align: center;  font-family: 'Courier New', Courier, monospace;">
                 <b><i>Welcome {{user.firstName}} {{user.lastName}}</i></b></h3>
 
             <div *ngIf="user.category == 'underweight_male' || user.category == 'underweight_female'" class="modal-body">
