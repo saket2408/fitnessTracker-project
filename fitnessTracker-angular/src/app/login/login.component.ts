@@ -1,6 +1,9 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { __importDefault } from 'tslib'
+import { __importDefault } from 'tslib';
+import * as CryptoJS from 'crypto-js';
+import { stringify } from '@angular/compiler/src/util';
+import { AuthService, GoogleLoginProvider } from 'angular4-social-login';
 
 @Component({
   selector: 'app-login',
@@ -21,9 +24,11 @@ export class LoginComponent implements OnInit {
   emailObj: emailObj
   emailObj1: emailObj1
   email: any
-  constructor( private route:ActivatedRoute,private router:Router) { }
+  user: any;
+  constructor( private route:ActivatedRoute,private router:Router, private _socioAuthServ: AuthService) { }
 
   ngOnInit() {
+    
     }
   
 
@@ -53,8 +58,10 @@ else{
         this.error = data.message;
         this.router.navigate(['login']);
       }
-      else{
-        localStorage.setItem("email" , data.email);
+      
+      else{                 
+        var encr = CryptoJS.AES.encrypt(data.email,"randomPassphrase");
+        localStorage.setItem("token" , encr.toString());
         this.router.navigate(['home']);
           }
     })
@@ -162,7 +169,39 @@ else{
 }
 }
 
+signin(): void {
+  let platform = GoogleLoginProvider.PROVIDER_ID;
+  this._socioAuthServ.signIn(platform).then(
+    (response) => {
+      this.user = response,
+        this._url = `http://localhost:8010/loginWithGmail`
+      fetch(this._url, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          email: this.user.email,
 
+        })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.message != null) {
+            this.error = data.message;
+            this.router.navigate(['login']);
+          }
+          else {
+            var encr = CryptoJS.AES.encrypt(data.email,"randomPassphrase");
+        localStorage.setItem("token" , encr.toString());
+            this.router.navigate(['home']);
+          }
+        })
+
+
+    }
+  );
+}
 }
 
 interface editObj{

@@ -27,26 +27,23 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 @Service
 public class FeignService {
 
-
 	private UserServiceClient userServiceClient;
-	
+
 	private OverWeightFemaleExerciseClient overWeightFemaleExerciseClient;
-	private  OverWeightFemaleMealClient overWeightFemaleMealClient;
+	private OverWeightFemaleMealClient overWeightFemaleMealClient;
 	private OverWeightMaleExerciseClient overWeightMaleExerciseClient;
 	private OverWeightMaleMealClient overWeightMaleMealClient;
-	
+
 	private UnderWeightFemaleExerciseClient underWeightFemaleExerciseClient;
-	private  UnderWeightFemaleMealClient underWeightFemaleMealClient;
+	private UnderWeightFemaleMealClient underWeightFemaleMealClient;
 	private UnderWeightMaleExerciseClient underWeightMaleExerciseClient;
 	private UnderWeightMaleMealClient underWeightMaleMealClient;
-	
-	
+
 	private NormalWeightFemaleExerciseClient normalWeightFemaleExerciseClient;
 	private NormalWeightFemaleMealClient normalWeightFemaleMealClient;
 	private NormalWeightMaleExerciseClient normalWeightMaleExerciseClient;
 	private NormalWeightMaleMealClient normalWeightMaleMealClient;
-		
-	
+
 	@Autowired
 	public FeignService(UserServiceClient userServiceClient,
 			OverWeightFemaleExerciseClient overWeightFemaleExerciseClient,
@@ -77,95 +74,79 @@ public class FeignService {
 		this.normalWeightMaleMealClient = normalWeightMaleMealClient;
 	}
 
-	
-
-	
-	public ResponseEntity<?> createUser(UserRequest userRequest){
+	public ResponseEntity<?> createUser(UserRequest userRequest) {
 		return userServiceClient.createUser(userRequest);
 	}
 
 	@HystrixCommand(fallbackMethod = "getFallbackCreateUser")
-	public ResponseEntity<?> verifyUser(UserRequest userRequest){
+	public ResponseEntity<?> verifyUser(UserRequest userRequest) {
 		return userServiceClient.verifyUser(userRequest);
 	}
-	
 
-	public ResponseEntity<?> deleteUser(Integer id){
+	public ResponseEntity<?> deleteUser(Integer id) {
 		return userServiceClient.deleteUser(id);
 	}
-	
-	public ResponseEntity<?> getAllUsers(){
+
+	public ResponseEntity<?> getAllUsers() {
 		return userServiceClient.getAllUsers();
 	}
-	
-	public ResponseEntity<?> verifyUserBycrypt(UserRequest userRequest){
+
+	public ResponseEntity<?> verifyUserBycrypt(UserRequest userRequest) {
 		return userServiceClient.verifyUserBycrypt(userRequest);
 	}
-	
-	public ResponseEntity<?> getUserByEmail(UserRequest ur){
+
+	public ResponseEntity<?> getUserByEmail(UserRequest ur) {
 		return userServiceClient.getUserByEmail(ur);
 	}
-	
 
-	public ResponseEntity<?> sendPassword(UserRequest user){
+	public ResponseEntity<?> sendPassword(UserRequest user) {
 		return userServiceClient.sendPassword(user);
 	}
-	
 
-	public ResponseEntity<?> updatePassword(UserRequest user){
+	public ResponseEntity<?> updatePassword(UserRequest user) {
 		return userServiceClient.updatePassword(user);
 	}
-	
-	
-	public ResponseEntity<?> getWorkout(String workout){
-		if(workout.equals("underweight_female")) {
+
+	public ResponseEntity<?> getWorkout(String workout) {
+		if (workout.equals("underweight_female")) {
 			return underWeightFemaleExerciseClient.getAll();
-		}
-		else if(workout.equals("underweight_male")) {
+		} else if (workout.equals("underweight_male")) {
 			return underWeightMaleExerciseClient.getAll();
-		}
-		else if(workout.equals("overweight_female")){
+		} else if (workout.equals("overweight_female")) {
 			return overWeightFemaleExerciseClient.getAll();
-		}
-		else if(workout.equals("normal_male")) {
+		} else if (workout.equals("normal_male")) {
 			return normalWeightMaleExerciseClient.getAll();
-		}
-		else if(workout.equals("normal_female")) {
+		} else if (workout.equals("normal_female")) {
 			return normalWeightFemaleExerciseClient.getAll();
-		}
-		else{
+		} else {
 			return overWeightMaleExerciseClient.getAll();
-			}
+		}
 
 	}
-	
-	public ResponseEntity<?> getMeal(String workout){
-		if(workout.equals("underweight_female")) {
+
+	public ResponseEntity<?> getMeal(String workout) {
+		if (workout.equals("underweight_female")) {
 			return underWeightFemaleMealClient.getMeal();
-		}
-		else if(workout.equals("underweight_male")) {
+		} else if (workout.equals("underweight_male")) {
 			return underWeightMaleMealClient.getMeal();
-		}
-		else if(workout.equals("overweight_female")){
+		} else if (workout.equals("overweight_female")) {
 			return overWeightFemaleMealClient.getMeal();
-		}
-		else if(workout.equals("normal_male")) {
+		} else if (workout.equals("normal_male")) {
 			return normalWeightMaleMealClient.getMeal();
-		}
-		else if(workout.equals("normal_female")) {
+		} else if (workout.equals("normal_female")) {
 			return normalWeightFemaleMealClient.getMeal();
-		}
-		else {
+		} else {
 			return overWeightMaleMealClient.getMeal();
-			}
-		
+		}
+
 	}
-	
-	
-	public ResponseEntity<?> getFallbackCreateUser(UserRequest userRequest){
+
+	public ResponseEntity<?> getFallbackCreateUser(UserRequest userRequest) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new Error("ERROR 404: server unavaible"));
 	}
-	
-	
-	
+
+	public ResponseEntity<?> verifyUserGmail(UserRequest userRequest) {
+		return userServiceClient.verifyUserGmail(userRequest);
+	}
+
 }

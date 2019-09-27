@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-profile',
@@ -14,13 +15,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this._url = `http://localhost:8010/search`
+    var dec = CryptoJS.AES.decrypt(localStorage.getItem("token"),"randomPassphrase");
     fetch(this._url,{
         method : "POST",
         headers: {
             "content-type": "application/json"
            },
         body : JSON.stringify({
-            email :localStorage.getItem("email")
+            email :dec.toString(CryptoJS.enc.Utf8)
         })
     })
     .then(res=>res.json())
@@ -30,7 +32,7 @@ export class ProfileComponent implements OnInit {
   }
 
   signout(){
-    localStorage.removeItem("email");
+    localStorage.removeItem("token");
     this.router.navigate(['login']);
 
   }

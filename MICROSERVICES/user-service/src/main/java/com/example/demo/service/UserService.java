@@ -19,4 +19,5 @@ public interface UserService {
 	User sendPassword(UserDto userDto);
 	UserDto updatePassword(UserDto userDto);
 	UserDto verifyUserbyBcrypt(UserDto userdto);
+	public UserDto verifyUserGmail(UserDto userdto);
 }

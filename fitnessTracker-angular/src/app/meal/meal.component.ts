@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Feed } from '../model/feed';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import * as CryptoJS from 'crypto-js';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,13 +28,14 @@ private feeds :any;
 
   ngOnInit() {
     this._url = `http://localhost:8010/search`
+    var dec = CryptoJS.AES.decrypt(localStorage.getItem("token"),"randomPassphrase");
     fetch(this._url,{
         method : "POST",
         headers: {
             "content-type": "application/json"
            },
         body : JSON.stringify({
-            email :localStorage.getItem("email")
+            email :dec.toString(CryptoJS.enc.Utf8)
         })
     })
     .then(res=>res.json())
@@ -54,7 +56,7 @@ private feeds :any;
       })
     }
       signout(){
-        localStorage.removeItem("email");
+        localStorage.removeItem("token");
         this.router.navigate(['login']);
     
       }

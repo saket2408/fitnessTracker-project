@@ -224,5 +224,25 @@ public class UserServiceImpl implements UserService {
 
 		}
 
+	}
+
+	@Override
+	public UserDto verifyUserGmail(UserDto userdto) {
+		ModelMapper mapper = new ModelMapper();
+		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		String email = userdto.getEmail();
+		String password = userdto.getPassword();
+		User user = userRepository.findByEmail(email);
+		if (user == null) {
+			return null;
+		} else {
+			UserDto userDto = mapper.map(user, UserDto.class);
+			if (userDto.getEmail().equals(email)) {
+				return userDto;
+			} else {
+				return null;
+			}
+
+		}
 	} 
 }

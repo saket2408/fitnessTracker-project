@@ -36,5 +36,8 @@ public interface UserServiceClient {
 	
 	@PostMapping("/updatePassword")
 	public ResponseEntity<?> updatePassword(@RequestBody UserRequest user);
+	
+    @PostMapping("/loginWithGmail")
+	public ResponseEntity<?> verifyUserGmail(UserRequest userRequest);
 
 }

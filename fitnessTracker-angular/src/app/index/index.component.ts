@@ -11,7 +11,7 @@ export class IndexComponent implements OnInit {
   constructor(private router : Router) { }
 
   ngOnInit() {
-    if(localStorage.getItem("email")!=null){
+    if(localStorage.getItem("token")!=null){
       this.router.navigate(['home']);
   }
 

@@ -5,7 +5,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angular4-social-login';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -18,6 +18,13 @@ import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TrackComponent } from './track/track.component';
 import {ChartsModule} from 'ng2-charts';
+const google_oauth_client_id:string = '69341315168-op2qts24gbjmhpe593pd42e8cl2nvacv.apps.googleusercontent.com';
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider(google_oauth_client_id)
+  }
+]);
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +47,8 @@ import {ChartsModule} from 'ng2-charts';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ChartsModule
+    ChartsModule,
+    SocialLoginModule.initialize(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

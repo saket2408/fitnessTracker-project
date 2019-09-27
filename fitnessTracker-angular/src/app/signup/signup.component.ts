@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-signup',
@@ -64,7 +65,8 @@ onSubmit() {
     this.router.navigate(['signup']);
   }
   else{
-  localStorage.setItem("email" , this.registerForm.value.email);
+    var encr = CryptoJS.AES.encrypt(data.email,"randomPassphrase");
+    localStorage.setItem("token" , encr.toString());
   this.router.navigate(['home']);
   }
 })

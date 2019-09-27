@@ -26,6 +26,10 @@ public class HomeController {
 	public ResponseEntity<?> verifyUser(@RequestBody UserRequest userRequest){
 		return service.verifyUser(userRequest);
 	}
+	@PostMapping("/loginWithGmail")
+	public ResponseEntity<?> verifyUserGmail(@RequestBody UserRequest userRequest){
+		return service.verifyUserGmail(userRequest);
+	}
 	
 	@PostMapping("/loginbyBcrypt")
 	public ResponseEntity<?> verifyUserBycrpyt(@RequestBody UserRequest userRequest){
