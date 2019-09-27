@@ -36,7 +36,7 @@ export class TrackComponent  {
   public barChartLegend = true;
   public barChartData = [
     {data: [], label: 'expected'},
-    {data: [], label: 'your result'}
+    {data: [], label: 'actual'}
   ];
 
   ngOnInit() {

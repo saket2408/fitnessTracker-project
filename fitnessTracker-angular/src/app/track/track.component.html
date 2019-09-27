@@ -10,8 +10,22 @@
 
 <div class="col-sm-5">
 
-    <h1>Day {{dayId}} Activity Tracker</h1><br><br>
+    <h1 style="font-family: 'Acme', sans-serif;">Day {{dayId}} Activity Tracker</h1><br><br>
+    <div class="row">
+        <div class="col-sm-5">
+            <span class="badge badge-info">Excerise Name</span>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">
+            <span style="background-color: rgb(243, 155, 224)" class="badge badge-danger">Expected</span>
+        </div>
+        <div class="col-sm-2">
+            <span style="background-color: rgb(135, 192, 245)" class="badge badge-info">Actual</span>
+        </div>
 
+    </div>
+
+    <br><br>
 
     <form #myForm="ngForm" (submit)="getValues(myForm.value)" ngNativeValidate>
         <div class="divMain" *ngFor="let e of exercise ; let i = index">
@@ -31,10 +45,11 @@
 
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Evaluate</button>
+        <button type="submit" class="btn btn-primary">Evaluate</button> &nbsp;
+        <button type="button" routerLink='/home' class="btn btn-primary">Back to home</button>
     </form>
     <br>
-    <button type="button" routerLink='/home' class="btn btn-primary">Back to home</button>
+
 </div>
 <div class="col-sm-7"><br><br><br>
     <div style="display:block">
