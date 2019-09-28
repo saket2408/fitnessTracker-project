@@ -29,7 +29,14 @@ export class TrackComponent  {
 
    public barChartOptions = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero:true
+          }
+      }]
+  }
   };
   
   public barChartLabels = [];
