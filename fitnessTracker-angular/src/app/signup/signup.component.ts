@@ -42,6 +42,7 @@ onSubmit() {
       return;
   }
   this._url = `http://localhost:8010/users`
+  console.log("kdf"  )
   fetch(this._url,{
     method : "POST",
     headers: {
@@ -65,9 +66,9 @@ onSubmit() {
     this.router.navigate(['signup']);
   }
   else{
-    var encr = CryptoJS.AES.encrypt(data.email,"randomPassphrase");
+    var encr = CryptoJS.AES.encrypt(this.registerForm.value.email,"randomPassphrase");
     localStorage.setItem("token" , encr.toString());
-  this.router.navigate(['home']);
+    this.router.navigate(['home']);
   }
 })
 }

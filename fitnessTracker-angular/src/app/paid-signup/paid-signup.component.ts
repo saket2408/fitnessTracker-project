@@ -36,21 +36,22 @@ get f() { return this.registerForm.controls; }
 onSubmit() {
   this.submitted = true;
 
+
   // stop here if form is invalid
   if (this.registerForm.invalid) {
       return;
   }
-
+console.log("fsj")
   this._url = `http://localhost:8090/pay`
   fetch(this._url,{
     method : "GET",
     headers:{
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Content-Type': 'application/json'
     }
   })
        .then(res=>res.json())
        .then(data=>{
+         console.log(data)
         document.location.href = data.message;
        })
   }

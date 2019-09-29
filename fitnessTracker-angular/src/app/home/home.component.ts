@@ -29,6 +29,7 @@ private feeds :any;
   ngOnInit() {
     this._url = `http://localhost:8010/search`
     var dec = CryptoJS.AES.decrypt(localStorage.getItem("token"),"randomPassphrase");
+   
     fetch(this._url,{
         method : "POST",
         headers: {
