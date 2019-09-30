@@ -24,7 +24,7 @@
         <div *ngFor="let wo of workout" class="day">
 
             <div *ngIf="days[wo.day-1]; else notShow1">
-                <button data-toggle="modal" class="day1 btn btn-success" [attr.data-target]="'#day'+wo.day">Day {{wo.day}}</button>
+                <button data-toggle="modal" class="day1 btn btn-success" [attr.data-target]="'#day'+wo.day">Day {{wo.day}} <i class='fas fa-check'></i></button>
                 <div id="day{{wo.day}}" class="modal">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -48,7 +48,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">back</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal" routerLink='../track/{{wo.day}}'>Show Your Results</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal" routerLink='../track/{{wo.day}}'>See your Results</button>
                             </div>
                         </div>
                     </div>
