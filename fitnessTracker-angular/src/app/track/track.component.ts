@@ -20,6 +20,9 @@ export class TrackComponent  {
  actualAmount :any[]=[]
  doneAmount:any[]=[]
  v : any[]=[];
+ exercise_detail:String=""
+ flag:boolean
+ 
 
  public chartType: string = 'line';
 
@@ -77,15 +80,56 @@ export class TrackComponent  {
         .then(result=>{
           this.workout = result;
           this.exercise= this.workout[this.dayId-1].workout
-          //console.log(this.exercise[0].exerciseName)
-            
+          this._url = `http://localhost:8008/getDetailsByDay`
+          fetch(this._url,{
+              method : "POST",
+              headers: {
+                  "content-type": "application/json"
+                },
+              body : JSON.stringify({
+                  email :dec.toString(CryptoJS.enc.Utf8),
+                  dayno : this.dayId
+              })
+          })
+          .then(res=>res.json())
+          .then(data=>{
+            if(data.message=='error'){
+              this.flag = true;
+             
+            }
+            else{
+              this.flag = false;
+              this.doneAmount= data.exercise.split(",");
+              
+                var i;
+                for(i=0;i<this.workout[this.dayId-1].workout.length;i++)
+                {
+                this.actualAmount.push(this.exercise[i].amount); 
+                }
+
+               
+                var i;
+                for(i=0;i<this.workout[this.dayId-1].workout.length;i++)
+                {
+                this.barChartLabels.push(this.exercise[i].exerciseName);
+                }
+               
+               this.barChartData[0].data = this.actualAmount
+              this.barChartData[1].data = this.doneAmount
+            }
+                  
         })
       })
-  
-  }
+    })
+      
+    }
 
   getValues(v)
   {
+    if (!confirm("Are you sure!! Once submitted cannot be undone.")) {
+      return false;
+    } 
+    (<HTMLInputElement> document.getElementById("btn")).disabled = true;
     this.barChartData[0].data = []
     this.barChartData[1].data =[]
     this.doneAmount=[]
@@ -93,26 +137,28 @@ export class TrackComponent  {
     this.barChartLabels=[]
   
     this.doneAmount=Object.values(v);
-    //console.log(this.doneAmount)
+  
     var i;
 
 
      for(i=0;i<this.workout[this.dayId-1].workout.length;i++)
      {
       this.actualAmount.push(this.exercise[i].amount);
+      
      }
 
-     //console.log(this.actualAmount)
+ 
      var i;
      for(i=0;i<this.workout[this.dayId-1].workout.length;i++)
      {
       this.barChartLabels.push(this.exercise[i].exerciseName);
      }
-   // console.log(this.barChartLabels)
+      
+     this.exercise_detail = this.doneAmount.join(",");
+
     this.barChartData[0].data = this.actualAmount
     this.barChartData[1].data = this.doneAmount
-   // console.log(this.barChartData[0])
-    //console.log(this.barChartData[1])
+
     var dec = CryptoJS.AES.decrypt(localStorage.getItem("token"),"randomPassphrase");
 
     this._url = `http://localhost:8008/saveDetails`
@@ -125,16 +171,18 @@ export class TrackComponent  {
         
          email :dec.toString(CryptoJS.enc.Utf8),
          dayno : this.dayId,
-         workout: this.doneAmount
+          exercise: this.exercise_detail
       })
   })
   .then(res=>res.json())
   .then(data=>{
     if(data.message!=null){
       console.log(data.message);
+      
     }
    
   })
+ 
   }
 
   

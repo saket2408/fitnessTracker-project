@@ -13,5 +13,6 @@ public interface UserDetailsRepository extends JpaRepository<UserDetails , Integ
 	
 
 	List<UserDetails> findAllByEmail(String email);
+	UserDetails findByEmailAndDayno(String email,int id);
 
 }

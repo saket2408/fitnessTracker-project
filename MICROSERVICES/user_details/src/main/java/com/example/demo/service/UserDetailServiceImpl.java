@@ -36,7 +36,13 @@ public class UserDetailServiceImpl implements UserDetailService{
 	public List<UserDetails> getUserDetailsbyEmail(String email) {
 		System.out.println("entering");
 		List<UserDetails> ud= userDetailsRepository.findAllByEmail(email);
+		return ud;
+	}
+	
+	@Override
+	public UserDetails getUserDetailsbyDay(String email,int id) {
 		
+	UserDetails ud= userDetailsRepository.findByEmailAndDayno(email, id);
 		return ud;
 	}
 

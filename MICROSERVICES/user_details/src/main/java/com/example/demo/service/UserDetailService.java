@@ -7,5 +7,6 @@ import com.example.demo.entity.UserDetails;
 public interface UserDetailService {
 	public UserDetails saveDetails (UserDetails ud);
 	public List<UserDetails> getUserDetailsbyEmail(String email);
+	UserDetails getUserDetailsbyDay(String email, int id);
 
 }

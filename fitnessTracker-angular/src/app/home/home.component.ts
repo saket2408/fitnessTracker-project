@@ -20,6 +20,9 @@ export class HomeComponent implements OnInit {
  user : any
   _url: any
   workout : any
+  days:any=[false,false,false,false,false,false,false,false,
+    false,false,false,false,false,false,false,false,false,false,false,false,
+    false,false,false,false,false,false,false,false,false,false]
   private feedUrl: string = 'https://www.who.int/rss-feeds/news-english.xml';
   private rssToJsonServiceBaseUrl: string = 'https://rss2json.com/api.json?rss_url='
 private feed:any;
@@ -53,7 +56,30 @@ private feeds :any;
         .then(res=>res.json())
         .then(result=>{
           this.workout = result;
-          this.refreshFeed();          
+          this.refreshFeed();
+          this._url = `http://localhost:8008/getDetails`
+   
+          fetch(this._url,{
+              method : "POST",
+              headers: {
+                  "content-type": "application/json"
+                },
+              body : JSON.stringify({
+                  email : dec.toString(CryptoJS.enc.Utf8)
+              })
+          })
+          .then(res=>res.json())
+          .then(data=>{  
+            if(data.message=="error"){
+
+            }
+            else{
+              data.forEach(element => {
+                  this.days[element.dayno-1] = true;
+              });
+            }
+           })
+
         })
       })
      

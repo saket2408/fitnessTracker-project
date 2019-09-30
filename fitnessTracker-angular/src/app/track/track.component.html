@@ -39,13 +39,29 @@
 
                     <input class="form-control" id="ex2" type="text" value={{e.amount}} disabled>
                 </div>
-                <div class="col-sm-2">
-                    <input class="form-control" id="ex1" type="number" name="{{'value'+i}}" min="5" max={{e.amount}} ngModel required>
+                <div *ngIf="flag; else notShow1">
+                    <div class="col-sm-2">
+                        <input class="form-control" id="ex1" type="number" name="{{'value'+i}}" min="5" max={{e.amount}} value={{doneAmount[i]}} ngModel required>
+                    </div>
                 </div>
+
+                <ng-template #notShow1>
+                    <div class="col-sm-2">
+                        <input class="form-control" id="ex1" type="number" name="{{'value'+i}}" min="5" max={{e.amount}} value={{doneAmount[i]}} ngModel required disabled>
+                    </div>
+                </ng-template>
+
 
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Evaluate</button> &nbsp;
+        <span *ngIf="flag; else notShow">
+            <button type="submit" id="btn" class="btn btn-primary">Evaluate</button> &nbsp;
+        </span>
+
+        <ng-template #notShow>
+            <button type="submit" class="btn btn-primary" disabled>Evaluate</button> &nbsp;
+        </ng-template>
+
         <button type="button" routerLink='/home' class="btn btn-primary">Back to home</button>
     </form>
     <br>
