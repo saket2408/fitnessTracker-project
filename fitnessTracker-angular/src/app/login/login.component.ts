@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   constructor( private route:ActivatedRoute,private router:Router, private _socioAuthServ: AuthService) { }
 
   ngOnInit() {
-    
+    window.history.forward();
     }
   
 
