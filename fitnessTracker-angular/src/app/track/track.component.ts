@@ -108,11 +108,33 @@ export class TrackComponent  {
      {
       this.barChartLabels.push(this.exercise[i].exerciseName);
      }
-    console.log(this.barChartLabels)
+   // console.log(this.barChartLabels)
     this.barChartData[0].data = this.actualAmount
     this.barChartData[1].data = this.doneAmount
    // console.log(this.barChartData[0])
     //console.log(this.barChartData[1])
+    var dec = CryptoJS.AES.decrypt(localStorage.getItem("token"),"randomPassphrase");
+
+    this._url = `http://localhost:8008/saveDetails`
+    fetch(this._url,{
+      method : "POST",
+      headers: {
+          "content-type": "application/json"
+         },
+      body : JSON.stringify({
+        
+         email :dec.toString(CryptoJS.enc.Utf8),
+         dayno : this.dayId,
+         workout: this.doneAmount
+      })
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    if(data.message!=null){
+      console.log(data.message);
+    }
+   
+  })
   }
 
   
