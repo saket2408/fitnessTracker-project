@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   constructor(private router : Router) { }
 
   ngOnInit() {
+    window.history.forward();
     this._url = `http://localhost:8010/search`
     var dec = CryptoJS.AES.decrypt(localStorage.getItem("token"),"randomPassphrase");
     fetch(this._url,{
