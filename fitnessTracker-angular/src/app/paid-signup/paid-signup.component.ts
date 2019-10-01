@@ -16,15 +16,15 @@ export class PaidSignupComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      firstName: [''],
+      lastName: [''],
+      email: [''],
       gender : ['male'],
-      age : ['', [Validators.required, Validators.min(18),Validators.max(55)]],
+      age : [''],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', Validators.required],
-      height: ['', Validators.required],
-      weight: ['', Validators.required]
+      confirmPassword: [''],
+      height: [''],
+      weight: ['']
     }, {
       validator: this.MustMatch('password', 'confirmPassword')
   });
@@ -41,7 +41,6 @@ onSubmit() {
   if (this.registerForm.invalid) {
       return;
   }
-console.log("fsj")
   this._url = `http://localhost:8090/pay`
   fetch(this._url,{
     method : "GET",

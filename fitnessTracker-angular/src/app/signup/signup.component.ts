@@ -10,24 +10,25 @@ import * as CryptoJS from 'crypto-js';
 })
 export class SignupComponent implements OnInit {
   @ViewChild('openModal',undefined) openModal:ElementRef;
+  @ViewChild('close',undefined) close:ElementRef;
   registerForm: FormGroup;
   submitted = false;
   _url : any
   error:any
-  mobileNumber:mobileNumber
+  mobileNumber:any
   constructor(private formBuilder: FormBuilder,private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      firstName: [''],
+      lastName: [''],
+      email: [''],
       gender : ['male'],
-      age : ['', [Validators.required, Validators.min(18),Validators.max(55)]],
+      age : [''],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', Validators.required],
-      height: ['', Validators.required],
-      weight: ['', Validators.required]
+      confirmPassword: [''],
+      height: [''],
+      weight: ['']
     }, {
       validator: this.MustMatch('password', 'confirmPassword')
   });
@@ -37,15 +38,17 @@ export class SignupComponent implements OnInit {
 get f() { return this.registerForm.controls; }
 
 onSubmit() {
+ 
+  
   this.submitted = true;
 
   // stop here if form is invalid
   if (this.registerForm.invalid) {
       return;
   }
-  this.openModal.nativeElement.click();
+  
   this._url = `http://localhost:8010/users`
-  console.log("kdf"  )
+ 
   fetch(this._url,{
     method : "POST",
     headers: {
@@ -69,32 +72,35 @@ onSubmit() {
     this.router.navigate(['signup']);
   }
   else{
-    var encr = CryptoJS.AES.encrypt(this.registerForm.value.email,"randomPassphrase");
-    localStorage.setItem("token" , encr.toString());
-    this.router.navigate(['home']);
+    this.openModal.nativeElement.click();
   }
 })
 }
 
 sendmsg(mobileNumber)
 {
-  console.log(mobileNumber.mobile)
-  this._url = `http://b4ibm15.iiht.tech:8001/sendMsg`
+  
+  this._url = `http://localhost:8001/sendMsg`
   fetch(this._url,{
-      method : "POST",
-      headers: {
-          "content-type": "application/json"
-         },
-      body : JSON.stringify({
-         phoneNo : mobileNumber.mobile,
-      })
-  })
-  .then(res=>res.json())
-  .then(data=>{
-    if(data.message!=null){
-      console.log(data.message);
-    }
+    method : "POST",
+    headers: {
+        "content-type": "application/json"
+       },
+    body : JSON.stringify({
+       phoneNo : mobileNumber.mobile
+    })
+})
+.then(res=>res.json())
+.then(data=>{
+    this.close.nativeElement.click();
+    console.log(data)
+    if(data.message!= null){
+      console.log("sjd")
+      var encr = CryptoJS.AES.encrypt(this.registerForm.value.email,"randomPassphrase");
+    localStorage.setItem("token" , encr.toString());
+    this.router.navigate(['home']);
     
+    }
    
   })
 }
@@ -122,7 +128,3 @@ return (formGroup: FormGroup) => {
 }
 
 
-
-interface mobileNumber{
-  mobile : String
-}

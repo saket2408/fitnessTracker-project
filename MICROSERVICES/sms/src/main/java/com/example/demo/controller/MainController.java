@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.example.demo.entity.ErrorModel;
 import com.example.demo.entity.Mobile;
 
 
@@ -48,7 +48,7 @@ public class MainController {
 		        "Welcome to Fitness Tracker").create();
 
 		    System.out.println(message.getSid());
-		    return ResponseEntity.status(HttpStatus.CREATED).body(message.getSid());
+		    return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorModel(message.getSid()));
 		
 		
 	}
