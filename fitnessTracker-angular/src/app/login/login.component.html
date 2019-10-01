@@ -129,12 +129,20 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
+                <div *ngIf="error2">
+                    <div class="alert alert-danger">
+                        <strong style="color: black; font-size: 20px;">{{error2}}</strong>
+                    </div>
+                </div>
 
-
-                <form #changeForm="ngForm" (submit)="updatePassword(changeForm.value,$event)">
+                <form #changeForm="ngForm" ngNativeValidate (submit)="updatePassword(changeForm.value,$event)">
                     <div class="form-group">
                         <label for="password">password</label>
-                        <input type="password" id="password" placeholder="new password" class="form-control" name="password" ngModel required/>
+                        <input type="password" id="password" placeholder="new password" class="form-control" name="password" ngModel minlength="8" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="cpassword">confirm pasword</label>
+                        <input type="password" id="cpassword" placeholder="confirm password" class="form-control" name="cpassword" ngModel minlength="8" required/>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

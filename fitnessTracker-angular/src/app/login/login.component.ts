@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   _url : any
   error: any
   error1: any
+  error2:any
   emailObj: emailObj
   emailObj1: emailObj1
   email: any
@@ -138,9 +139,14 @@ else{
 
 updatePassword(emailObj1 ,event : Event){
   event.preventDefault();
-  if((emailObj1.password == "")){
-    this.error1 = "Please Enter password";
+  if((emailObj1.password == ""|| emailObj1.cpassword == "")){
+    console.log("in if")
+    this.error2 = "Please Enter password";
    
+      }
+      else if(emailObj1.password!=emailObj1.cpassword){
+        console.log("IN elseif")
+        this.error2="Password Must Match"
       }
 else{
   this._url = `http://localhost:8010/updatePassword`
@@ -215,5 +221,6 @@ interface emailObj{
 
 interface emailObj1{
   password : String
+  cpassword : String
 }
 

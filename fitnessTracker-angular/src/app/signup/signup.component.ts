@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
@@ -9,10 +9,12 @@ import * as CryptoJS from 'crypto-js';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  @ViewChild('openModal',undefined) openModal:ElementRef;
   registerForm: FormGroup;
   submitted = false;
   _url : any
   error:any
+  mobileNumber:mobileNumber
   constructor(private formBuilder: FormBuilder,private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
@@ -41,6 +43,7 @@ onSubmit() {
   if (this.registerForm.invalid) {
       return;
   }
+  this.openModal.nativeElement.click();
   this._url = `http://localhost:8010/users`
   console.log("kdf"  )
   fetch(this._url,{
@@ -73,6 +76,29 @@ onSubmit() {
 })
 }
 
+sendmsg(mobileNumber)
+{
+  console.log(mobileNumber.mobile)
+  this._url = `http://b4ibm15.iiht.tech:8001/sendMsg`
+  fetch(this._url,{
+      method : "POST",
+      headers: {
+          "content-type": "application/json"
+         },
+      body : JSON.stringify({
+         phoneNo : mobileNumber.mobile,
+      })
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    if(data.message!=null){
+      console.log(data.message);
+    }
+    
+   
+  })
+}
+
 
 MustMatch(controlName: string, matchingControlName: string) {
 return (formGroup: FormGroup) => {
@@ -93,4 +119,10 @@ return (formGroup: FormGroup) => {
 }
   }
 
+}
+
+
+
+interface mobileNumber{
+  mobile : String
 }
