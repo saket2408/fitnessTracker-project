@@ -50,7 +50,6 @@ onSubmit() {
   })
        .then(res=>res.json())
        .then(data=>{
-         console.log(data)
         document.location.href = data.message;
        })
   }
