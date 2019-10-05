@@ -1,0 +1,5 @@
+[1005/203818.050:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1005/203818.102:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1005/203818.102:ERROR:exception_snapshot_win.cc(98)] thread ID 588 not found in process
+[1005/204220.404:ERROR:process_info.cc(359)] UncheckedAllocate
+[1005/204226.661:ERROR:process_info.cc(359)] UncheckedAllocate

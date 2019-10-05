@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PaidSignupComponent } from './paid-signup.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 describe('PaidSignupComponent', () => {
   let component: PaidSignupComponent;
@@ -8,7 +9,8 @@ describe('PaidSignupComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaidSignupComponent ]
+      declarations: [ PaidSignupComponent ],
+      
     })
     .compileComponents();
   }));
@@ -19,7 +21,5 @@ describe('PaidSignupComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+
 });

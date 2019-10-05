@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TrackComponent } from './track.component';
+import { FormsModule } from '@angular/forms';
 
 describe('TrackComponent', () => {
   let component: TrackComponent;
@@ -8,7 +9,7 @@ describe('TrackComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrackComponent ]
+      declarations: [ TrackComponent]
     })
     .compileComponents();
   }));
@@ -19,7 +20,4 @@ describe('TrackComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });

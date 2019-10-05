@@ -24,4 +24,10 @@ management:
     web: 
       exposure: 
         include: 'hystrix.stream'
+        
+
+turbine:
+  aggregator:
+    clusterConfig: SAMPLE-HYSTRIX-AGGREGATE
+    appConfig: SAMPLE-HYSTRIX-AGGREGATE
       
