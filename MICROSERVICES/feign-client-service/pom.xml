@@ -90,12 +90,6 @@
 			<artifactId>ant</artifactId>
 			<version>1.9.3</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>
-				spring-cloud-starter-netflix-turbine
-			</artifactId>
-		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

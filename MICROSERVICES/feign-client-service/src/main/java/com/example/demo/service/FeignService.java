@@ -107,6 +107,7 @@ public class FeignService {
 		return userServiceClient.updatePassword(user);
 	}
 
+
 	public ResponseEntity<?> getWorkout(String workout) {
 		if (workout.equals("underweight_female")) {
 			return underWeightFemaleExerciseClient.getAll();
@@ -123,6 +124,7 @@ public class FeignService {
 		}
 
 	}
+
 
 	public ResponseEntity<?> getMeal(String workout) {
 		if (workout.equals("underweight_female")) {
@@ -144,6 +146,8 @@ public class FeignService {
 	public ResponseEntity<?> getFallbackCreateUser(UserRequest userRequest) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new Error("ERROR 404: server unavaible"));
 	}
+	
+	
 
 	public ResponseEntity<?> verifyUserGmail(UserRequest userRequest) {
 		return userServiceClient.verifyUserGmail(userRequest);
