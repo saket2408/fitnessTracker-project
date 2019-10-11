@@ -12,7 +12,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableHystrix
 @EnableFeignClients(basePackages = {"com.example.demo"})
-@EnableCircuitBreaker
 @EnableHystrixDashboard
 public class FeignClientServiceApplication {
 

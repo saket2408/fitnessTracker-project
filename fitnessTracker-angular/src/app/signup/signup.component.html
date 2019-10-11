@@ -100,10 +100,10 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form #nform="ngForm" (submit)="sendmsg(nform.value)" ngNativeValidate>
+                    <form #nform="ngForm" ngNativeValidate (submit)="sendmsg(nform.value)">
                         <div class="form-group">
                             <label for="email">Mobile Number:</label>
-                            <input type="number" id="mobile" class="form-control" name="mobile" ngModel minlength="10" required/>
+                            <input type="number" id="mobile" class="form-control" name="mobile" pattern="[0-9]{10}" title="enter valid number" ngModel required/>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
